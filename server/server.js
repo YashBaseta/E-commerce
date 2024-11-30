@@ -5,6 +5,7 @@ const cors = require('cors')
 const authRouter = require("./routes/auth/auth-routes")
 const adminProductsRouter = require("../server/routes/admin/products-routes")
 
+
 // connect DB
 
 mongoose.connect("mongodb+srv://test:test123@cluster0.ywb4r.mongodb.net/").then(() => console.log("connect DB")).catch((console.error()))
