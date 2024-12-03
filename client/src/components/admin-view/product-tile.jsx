@@ -7,7 +7,10 @@ function AdminProductTile({
   setOpenCreateProductsDialog,
   setCurrentEditedId,
   handleDelete,
-}) {
+}) 
+
+
+{console.log(product.title);
   return (
     <Card className="w-full max-w-sm mx-auto">
       <div>

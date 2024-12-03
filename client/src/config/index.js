@@ -129,4 +129,32 @@ export const addProductFormElements = [
       label:'Footwares',
       path : '/shopping/productlist'
     }
+  ];
+
+  export const filterOptions = {
+    Category:[
+      {id:"man" ,Label:"Man"},
+      {id:"women" ,Label:"Woman"},
+      {id:"kids" ,Label:"Kids"},
+      {id:"accessories" ,Label:"Accessories"},
+      {id:"footwear" ,Label:"Footwear"},
+    ],
+    brand:[
+      {id:"nike" ,Label:"Nike"},
+      {id:"adidas" ,Label:"Adidas"},
+      {id:"puma" ,Label:"Puma"},
+      {id:"levi" ,Label:"Levi,s"},
+      {id:"zara" ,Label:"Zara"},
+      {id:"h&m" ,Label:"H&M"},
+    ]
+  };
+
+  export const sortOptions=[
+    {id:"price-lowtohigh" ,label:"price: Low to High"},
+    {id:"price-hightolow" ,label:"price: High to Low"},
+    {id:"price-lowtohigh" ,label:"price: Low to High"},
+    {id:"title-atoz" ,label:"Title: A to Z"},
+    {id:"title-ztoa" ,label:"Title: Z to A"},
+    
   ]
+  

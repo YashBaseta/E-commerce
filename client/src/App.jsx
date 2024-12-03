@@ -65,7 +65,7 @@ dispatch(checkAuth())
         </Route>
 <Route path='/unauth-page' element={<UnauthPage/>}/>
 
-<Route path='*' element={<NotFound />}/> 
+<Route path='*' element={<CheckAuth isAuthenticated={!isAuthenticated} user={user}>      <ShoppingLayout />    </CheckAuth>}/> 
         
 
 

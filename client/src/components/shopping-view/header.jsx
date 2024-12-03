@@ -23,22 +23,25 @@ return<div className="flex lg:items-center lg:flex-row flex-col gap-4 ">
         </Button>
         <DropdownMenu>
         <DropdownMenuTrigger asChild>
+          <Button>
+            
           <Avatar className="bg-black">
             <AvatarFallback className="bg-black text-white font-extrabold">
               {user?.userName[0].toUpperCase()}
             </AvatarFallback>
           </Avatar>
+          </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent side="right" className="w-56">
-          <DropdownMenuLabel>Logged in as {user?.userName}</DropdownMenuLabel>
+        <DropdownMenuContent side="right" className="w-56 bg-white">
+          <DropdownMenuLabel className="ml-3">Logged in as {user?.userName}</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem onClick={()=>navigate('/shopping/account')} >
-            <UserCog className="mr-2 h-4 w-4" />
-            Account
+          <DropdownMenuItem className="flex  mt-2 " onClick={()=>navigate('/shopping/account')} >
+            <UserCog className="mr-2 h-4 w-4 ml-3 " />
+            <p>Account</p>
           </DropdownMenuItem>
           <DropdownMenuSeparator />
-          <DropdownMenuItem onClick={handleLogout} >
-            <LogOut className="mr-2 h-4 w-4" />
+          <DropdownMenuItem className="flex mt-2 " onClick={handleLogout} >
+            <LogOut className="mr-2 h-4 w-4 ml-3"/>
             Logout
           </DropdownMenuItem>
         </DropdownMenuContent>
