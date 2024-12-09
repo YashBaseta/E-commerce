@@ -5,7 +5,7 @@ import { Fragment } from "react";
 import { Checkbox } from "../ui/checkbox";
 import { Separator } from "../ui/separator";
 
-function ProductFilter(params) {
+function ProductFilter({filters,handleFilter}) {
     return(
         <div className="bg-background rounded-lg shadow-sm">
             <div className="p-4 border-b">
@@ -17,9 +17,13 @@ function ProductFilter(params) {
                         <Fragment>
                             <div >
                                 <h3 className="test-base font-bold">{keyItem}</h3>
-                                <div className="grid gap-2 mt-2">
-                                    {filterOptions[keyItem].map(option =><Label className="flex items-center gap-2 font-medium">
-                                        <Checkbox/>
+                                <div className="grid gap-2 mt-2" >
+                                    {filterOptions[keyItem].map(option =><Label key={option.id} className="flex items-center gap-2 font-medium">
+                                        <Checkbox
+                                           checked={ filters && Object.keys(filters).length > 0 && 
+                                            filters[keyItem] && filters[keyItem].indexOf(option.id) > -1
+                                                  }
+                                            onCheckedChange={() => handleFilter(keyItem,option.id)} />
                                         {option.Label}
                                     </Label>)}
                                 </div>

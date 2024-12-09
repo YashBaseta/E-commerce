@@ -152,9 +152,27 @@ export const addProductFormElements = [
   export const sortOptions=[
     {id:"price-lowtohigh" ,label:"price: Low to High"},
     {id:"price-hightolow" ,label:"price: High to Low"},
-    {id:"price-lowtohigh" ,label:"price: Low to High"},
     {id:"title-atoz" ,label:"Title: A to Z"},
     {id:"title-ztoa" ,label:"Title: Z to A"},
     
-  ]
+  ];
+
+
+  export const categoryOptionsMap = {
+    men: "Men",
+    women: "Women",
+    kids: "Kids",
+    accessories: "Accessories",
+    footwear: "Footwear",
+  };
+
+  export const brandOPtionsMap = {
+    nike:"Nike",
+    adidas:"Adidas",
+      puma:"Puma",
+      levi:"Levi,s",
+      zara:"Zara",
+      "h&m" :"H&M",
+
+  }
   
