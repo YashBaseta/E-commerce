@@ -18,9 +18,8 @@ mongoose.connect("mongodb+srv://test:test123@cluster0.ywb4r.mongodb.net/").then(
 const app = express()
 const PORT = process.env.PORT || 5000;
 app.use(
-  // http://localhost:5173
     cors({
-      origin: "https://e-commerce-iota-ecru.vercel.app/",
+      origin: "http://localhost:5173",
       methods: ["GET", "POST", "DELETE", "PUT"],
       allowedHeaders: [
         "Content-Type",
@@ -34,9 +33,7 @@ app.use(
   );
 
 
-app.use((req,res) =>{
-  res.json("hello")
-})
+
 
 
 app.use(cookieParser())
