@@ -34,7 +34,9 @@ app.use(
   );
 
 
-
+app.use((req,res) =>{
+  res.json("hello")
+})
 
 
 app.use(cookieParser())
