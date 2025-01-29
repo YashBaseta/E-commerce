@@ -13,7 +13,7 @@ function AuthLayout() {
         <div className="flex min-h-screen w-full">
       <div className="hidden lg:flex items-center justify-center w-[700px] px-12  bg-[url('https://img.freepik.com/premium-photo/woman-holding-bunch-colorful-bags-with-cell-phone-her-hand_616879-41588.jpg?w=740')] bg-cover bg-center h-screen ">      
       </div>
-      <div className="flex flex-1 items-center justify-center bg-background px-4 py-12 sm:px-6 lg:px-8">
+      <div className="flex flex-1 items-center justify-center bg-background px-4 py-12 sm:px-6 lg:px-8 ">
         <Outlet />
       </div>
     </div>

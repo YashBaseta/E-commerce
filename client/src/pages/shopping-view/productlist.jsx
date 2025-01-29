@@ -1,20 +1,30 @@
 import ProductFilter from "@/components/shopping-view/filter";
+import ProductDetailsDialog from "@/components/shopping-view/Product-details";
 import ShoppingProductTile from "@/components/shopping-view/Product-tile";
 import { Button } from "@/components/ui/button";
+import { useToast } from "@/components/ui/use-toast";
+
 import { sortOptions } from "@/config";
-import { fetchAllFilteredProducts } from "@/store/shop/products-slice";
+
+import { addToCart, fetchCartItems } from "@/store/shop/cart-slice";
+import { fetchAllFilteredProducts, fetchProductDetails } from "@/store/shop/products-slice";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
+
 import { ArrowUpDownIcon } from "lucide-react";
+
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createSearchParams, useSearchParams } from "react-router-dom";
 
 function ProductList(params) {
 const dispatch =useDispatch()
-const {productList} =useSelector(state=> state.shopProducts)
+const {user} = useSelector(state=>state.auth)
+const {productList,productDetails} =useSelector(state=> state.shopProducts)
 const [filters,setFilters] = useState(null);
 const [sort,setSort] = useState(null);
 const [searchParams,setSearchParams] = useSearchParams() //use to search according to parameters "filters"
+const [openDetailsDialog,setOpenDetailsDialog]=useState(false)
+const {toast} = useToast(); 
 
 
 function createSearchParamsHelper(filterParams) {
@@ -28,13 +38,13 @@ function createSearchParamsHelper(filterParams) {
       }
     }
   
-    console.log(queryParams, "queryParams");
+  
   
     return queryParams.join("&");
   }
 
 function handleSort(value) {
-    console.log(value);
+    
     
     setSort(value);
 
@@ -57,6 +67,24 @@ function handleFilter(getSectionId,getCurrentOption) {
     setFilters(cpyFilters)
     sessionStorage.setItem("filters", JSON.stringify(cpyFilters))
 }
+function handleGetProducDetails(getCurrentProductId) {
+
+    dispatch(fetchProductDetails(getCurrentProductId))
+    
+}
+function handleAddtoCart(getCurrentProductId) {
+    
+    dispatch(addToCart({userId:user?.id,productId:getCurrentProductId,quantity: 1})).then(data => {
+        if (data?.payload?.success) {
+            dispatch(fetchCartItems(user?.id))
+                    toast({
+                        title : "Cart Item is updated"
+                    })
+        }
+    }
+    )
+    
+}
 useEffect(() =>{
     setSort("price-lowtohigh")
     setFilters(JSON.parse(sessionStorage.getItem("filters")) || {})
@@ -76,7 +104,9 @@ useEffect(() => {
       );
   }, [dispatch, sort, filters]);
 
-console.log(filters);
+  useEffect(() => {
+if (productDetails !== null) setOpenDetailsDialog(true) 
+  },[productDetails])
 
 
     return(
@@ -106,10 +136,11 @@ console.log(filters);
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4" >
                 {
                     productList && productList.length > 0 ?
-                    productList.map(productItem => <ShoppingProductTile  key={productItem.id} product={productItem}/>) :null
+                    productList.map(productItem => <ShoppingProductTile handleGetProducDetails={handleGetProducDetails}  key={productItem.id} product={productItem} handleAddtoCart={handleAddtoCart}/>) :null
                 }
             </div>
         </div>
+        < ProductDetailsDialog open={openDetailsDialog} setOpen={setOpenDetailsDialog} productDetails={productDetails} />
        </div>
     )
 }

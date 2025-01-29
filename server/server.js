@@ -5,6 +5,8 @@ const cors = require('cors')
 const authRouter = require("./routes/auth/auth-routes")
 const adminProductsRouter = require("../server/routes/admin/products-routes")
 const shopProductsRouter = require("../server/routes/shop/products-routes")
+const shopCartRouter = require("./routes/shop/cart-routes")
+const shopAddressRouter = require("./routes/shop/address-routes")
 
 
 // connect DB
@@ -38,5 +40,6 @@ app.use(express.json())
 app.use('/api/auth',authRouter)
 app.use("/api/admin/products", adminProductsRouter);
 app.use("/api/shopping/productlist", shopProductsRouter);
-
+app.use("/api/shopping/cart", shopCartRouter);
+app.use("/api/shopping/address", shopAddressRouter);
 app.listen(PORT, () => console.log(`Server is now running on port ${PORT}`));

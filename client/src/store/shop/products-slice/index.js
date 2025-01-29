@@ -4,7 +4,8 @@ import axios from "axios";
 
 const initialState={
     isLoading:false,
-    productList:[]
+    productList:[],
+    productDetails:null
 }
 
 
@@ -12,7 +13,7 @@ const initialState={
         export const fetchAllFilteredProducts = createAsyncThunk(
             "/products/fetchAllProducts",
             async ({ filterParams, sortParams }) => {
-              console.log(fetchAllFilteredProducts, "fetchAllFilteredProducts");
+            
           
               const query = new URLSearchParams({
                 ...filterParams,
@@ -33,10 +34,26 @@ const initialState={
     }
   );
 
+
+  export const fetchProductDetails = createAsyncThunk(
+    "/products/fetchProdutDetails",
+    async (id) => {
+ 
+      const result = await axios.get(
+        `http://localhost:5000/api/shopping/productlist/get/${id}`
+      );
+return result?.data;
+}
+);
+
 const shoppingProductSlice = createSlice({
     name:'shoppingProducts',
     initialState,
-    reducers:{},
+    reducers:{
+      setProductDetails:(state) =>{
+        state.productDetails=null 
+      }
+    },
     extraReducers:(builder)=>{
         builder.addCase(fetchAllFilteredProducts.pending,(state,action)=>{
             state.isLoading=true
@@ -46,13 +63,25 @@ const shoppingProductSlice = createSlice({
     
         
     }).addCase(fetchAllFilteredProducts.rejected,(state,action)=>{
-        console.log("not display");
+        
         
         state.isLoading=false
         state.productList=[]     
 
+}) .addCase(fetchProductDetails.pending, (state, action) => {
+  state.isLoading = true;
 })
+.addCase(fetchProductDetails.fulfilled, (state, action) => {
+  state.isLoading = false;
+  state.productDetails = action.payload.data;
+})
+.addCase(fetchProductDetails.rejected, (state, action) => {
+  state.isLoading = false;
+  state.productDetails = null;
+});
 }
 })
 
+
+export const {setProductDetails} = shoppingProductSlice.actions;
 export default shoppingProductSlice.reducer

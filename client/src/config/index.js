@@ -61,7 +61,7 @@ export const addProductFormElements = [
       name: "category",
       componentType: "select",
       options: [
-        { id: "men", label: "Men" },
+        { id: "men", label: "Man" },
         { id: "women", label: "Women" },
         { id: "kids", label: "Kids" },
         { id: "accessories", label: "Accessories" },
@@ -110,7 +110,7 @@ export const addProductFormElements = [
       path : '/shopping/home'
     },{
       id:'men',
-      label:'Men',
+      label:'Man',
       path : '/shopping/productlist'
     },{
       id:'women',
@@ -132,8 +132,8 @@ export const addProductFormElements = [
   ];
 
   export const filterOptions = {
-    Category:[
-      {id:"man" ,Label:"Man"},
+    category:[
+      {id:"men" ,Label:"Man"},
       {id:"women" ,Label:"Woman"},
       {id:"kids" ,Label:"Kids"},
       {id:"accessories" ,Label:"Accessories"},
@@ -159,7 +159,7 @@ export const addProductFormElements = [
 
 
   export const categoryOptionsMap = {
-    men: "Men",
+    men: "Man",
     women: "Women",
     kids: "Kids",
     accessories: "Accessories",
