@@ -34,17 +34,7 @@ app.use(
 
 
 
-app.use(cors(
-  {
-    origin:[],
-    methods:["POST","GET"],
-    credentials:true
-  }
-))
 
-app.get("/",(req,res)=> {
-  res.json("Hello");
-})
 
 app.use(cookieParser())
 app.use(express.json())
